@@ -8,7 +8,8 @@ Click here : <https://covid19-tracker-abhay.herokuapp.com/>
 ## API for data
 Latest Top 10 Covid News : <https://covid19-tracker-abhay.herokuapp.com/Api/getNews> </br>
 Civic freedom tracker : <https://covid19-tracker-abhay.herokuapp.com/Api/civicFreedomTracker> </br>
-Weekly Siuation Reports by WHO : <https://covid19-tracker-abhay.herokuapp.com/Api/situationReports>
+Weekly Siuation Reports by WHO : <https://covid19-tracker-abhay.herokuapp.com/Api/situationReports> </br>
+Indian State wise latest covid data: <https://covid19-tracker-abhay.herokuapp.com/Api/indiaData>
 
 ## About Project
 Covid 19 Tracker is web application to display up to date data of covid cases.
@@ -36,8 +37,8 @@ Working on Bot Support
 ## Sample
 Dashboard Highlight           |  World wide data           |  Situation report & Latest News
 :-------------------------:|:---------------------------:|:-------------------------:
-![](https://github.com/Abhaysardhara/covid19-tracker/blob/master/Screenshot%20(70).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/master/Screenshot%20(71).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/master/Screenshot%20(72).png)
+![](https://github.com/Abhaysardhara/covid19-tracker/blob/main/Screenshot%20(70).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/main/Screenshot%20(71).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/main/Screenshot%20(72).png)
 
 Interactive Graphs         |  Civic Tracker           |  My Profile
 :-------------------------:|:---------------------------:|:-------------------------:
-![](https://github.com/Abhaysardhara/covid19-tracker/blob/master/Screenshot%20(73).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/master/Screenshot%20(74).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/master/Screenshot%20(75).png)
+![](https://github.com/Abhaysardhara/covid19-tracker/blob/main/Screenshot%20(73).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/main/Screenshot%20(74).png)  |  ![](https://github.com/Abhaysardhara/covid19-tracker/blob/main/Screenshot%20(75).png)
