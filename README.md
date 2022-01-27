@@ -8,7 +8,7 @@ Click here : <https://covid19-tracker-abhay.herokuapp.com/>
 ## API for data
 Latest Top 10 Covid News : <https://covid19-tracker-abhay.herokuapp.com/Api/getNews> </br>
 Civic freedom tracker : <https://covid19-tracker-abhay.herokuapp.com/Api/civicFreedomTracker> </br>
-Weekly Siuation Reports by WHO : <https://covid19-tracker-abhay.herokuapp.com/Api/situationReports> </br>
+World latest covid data : <https://covid19-tracker-abhay.herokuapp.com/Api/worldData> </br>
 Indian State wise latest covid data: <https://covid19-tracker-abhay.herokuapp.com/Api/indiaData>
 
 ## About Project
