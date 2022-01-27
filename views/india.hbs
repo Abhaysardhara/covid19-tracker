@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<link rel="icon" href="image/virus.png" type="image/x-icon"/>
+
+<title>COVID-19 DATA</title>
+<meta name="title" content="COVID-19 DATA INDIA">
+<meta name="description" content="Live statistics and coronavirus tracking the number of confirmed cases, recovered patients, tests, and death toll in the india due to the COVID-19 coronavirus from Wuhan, China. Coronavirus counter with new cases updates, deaths, and number of tests per 1 Million population. Historical data and info. Daily charts, graphs and updates">
+<meta name="keywords" content="coronavirus map, Corona virus cases india, cases india, state, india, Confirmed cases, recovered cases, total deaths, active cases, last updated, Maharashtra, kerala, karnataka, andhra pradesh, tamil nadu, delhi, uttar pradesh, west bengal, odisha, rajasthan, chhattisgarh, telangana, gujarat, haryana, madhya pradesh, bihar, assam, punjab, jammu and kashmir, jharkhand, uttrakhand, himachal pradesh, goa, puducherry, tripura, manipur, chandigarh, arunachal pradesh, meghalaya, nagaland, sikkim, ladakh, mizoram, lakshadweep"/>
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://covid19-tracker-abhay.herokuapp.com/">
+<meta property="og:title" content="Covid Dashboard By Abhay Sardhara">
+<meta property="og:description" content="Live stats and coronavirus news tracking the number of confirmed cases, recovered patients, tests, and deaths due to the COVID-19 coronavirus from Wuhan, China, USA ,Canada, Ontario,Toronto. Coronavirus counter with new cases, deaths, and number of tests per 1 Million population. Historical data and info. Daily charts, graphs, news and updates.">
+
+<script src="assets/js/jquery.min.js"></script>
+
+<link defer rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link defer rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+
+<!-- Core css -->
+<link defer rel="stylesheet" href="assets/css/main.css"/>
+<link defer rel="stylesheet" href="assets/css/theme1.css"/>
+
+<link defer rel="stylesheet" href="assets/css/buttons.dataTables.min.css">
+<link defer rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+
+<script defer src="assets/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js" defer></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js" defer></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js" defer></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-icons@1.0.1/foundation-icons.css" defer>
+
+{{!-- Chart Js --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="assets/js/util.js"></script>
+
+<style>
+    .change {
+        background-color: #283041;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        color: black;
+    }
+
+    .text-green, .text-info, .text-success, .text-danger, .text-primary, .text-warning, .mail-star.active, .page-title {
+        color: white !important;
+    }
+
+    div .page {
+        -webkit-filter: blur(0px);
+        -moz-filter: blur(0px);
+        -o-filter: blur(0px);
+        -ms-filter: blur(0px);
+        filter: blur(0px);
+    }
+
+</style>
+</head>
+
+<body class="font-roboto">
+<!-- Page Loader -->
+{{!-- <div class="page-loader-wrapper">
+    <div class="loader">
+    </div>
+</div> --}}
+
+<div id="main_content">
+
+    <div id="header_top" class="header_top">
+        <div class="container">
+            <div class="hleft">
+                <a class="header-brand" href="/"><img src="image/virus_small.jpg" alt="Covid19-Tracker Abhay Sardhara, MNNIT Allahabad" height="100%" width="100%"></a>
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link user_btn"><img class="avatar" src="image/icon1_small.jpg" alt="Abhay Sardhara, MNNIT Allahabad" data-toggle="tooltip" data-placement="right" title="User Menu"/></a>                  
+                    <a href="app-calendar"  class="nav-link icon app_inbox xs-hide"><i class="fi-calendar"></i></a>
+                </div>
+            </div>
+            <div class="hright">
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link icon settingbar"><i class="fi-widget" data-toggle="tooltip" data-placement="right" title="Settings"></i></a>
+                    <a href="javascript:void(0)" class="nav-link icon menu_toggle"><i class="fi-list"></i></a>
+                </div>            
+            </div>
+        </div>
+    </div>
+
+    <div id="rightsidebar" class="right_sidebar">
+        <a href="javascript:void(0)" class="p-3 settingbar float-right"><i class="fi-x"></i></a>
+        <div class="p-4">
+            <div class="mb-4">
+                <h6 class="font-14 font-weight-bold text-muted">Font Style</h6>
+                <div class="custom-controls-stacked font_setting">
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" name="font" value="font-opensans">
+                        <span class="custom-control-label">Open Sans Font</span>
+                    </label>
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" name="font" value="font-montserrat" checked="">
+                        <span class="custom-control-label">Montserrat Google Font</span>
+                    </label>
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" name="font" value="font-roboto">
+                        <span class="custom-control-label">Robot Google Font</span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <h6 class="font-14 font-weight-bold mt-4 text-muted">General Settings</h6>
+                <ul class="setting-list list-unstyled mt-1 setting_switch">
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Night Mode</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-darkmode">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Fix Navbar top</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-fixnavbar">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Header Dark</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-pageheader" checked="">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Min Sidebar Dark</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-min_sidebar">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Sidebar Dark</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-sidebar">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Icon Color</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-iconcolor">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Gradient Color</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-gradient">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Box Shadow</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-boxshadow">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">RTL Support</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-rtl">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="custom-switch">
+                            <span class="custom-switch-description">Box Layout</span>
+                            <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input btn-boxlayout">
+                            <span class="custom-switch-indicator"></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="user_div">
+        <h5 class="brand-name mb-4">COVID-19<a href="javascript:void(0)" class="user_btn"><i class="fi-x"></i></a></h5>
+        <div class="card-body">
+            <a href="https://github.com/Abhaysardhara"><img class="card-profile-img" src="image/icon1.jpg" alt=""></a>
+            <h6 class="mb-0">Abhay Sardhara</h6>
+            <span>abhays7675@gmail.com</span>
+            <div class="progress progress-xs">
+                <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-orange" role="progressbar" style="width: 5%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-indigo" role="progressbar" style="width: 13%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <hr>
+            <p>Activity</p>
+            <ul class="new_timeline">
+                <li>
+                    <div class="bullet pink"></div>
+                    <div class="time">09:00am</div>
+                    <div class="desc">
+                        <h3>Attendance</h3>
+                        <h4>College Class</h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="bullet pink"></div>
+                    <div class="time">04:00pm</div>
+                    <div class="desc">
+                        <h3>Added an interest</h3>
+                        <h4>“Competitive Programming”</h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="bullet green"></div>
+                    <div class="time">06:30pm</div>
+                    <div class="desc">
+                        <h3>Developer Team</h3>
+                        <h4>Hangouts</h4>
+                        <ul class="list-unstyled team-info margin-0 p-t-5">                                            
+                            <li><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="image/icon1_small.jpg" alt="Avatar"></li>                                           
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="bullet green"></div>
+                    <div class="time">09:00pm</div>
+                    <div class="desc">
+                        <h3>Finish</h3>
+                        <h4>Family Time</h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="left-sidebar" class="sidebar ">
+        <h5 class="brand-name">COVID-19 <a href="javascript:void(0)" class="menu_option float-right"><i class="fi-thumbnails toggle" data-toggle="tooltip" data-placement="left" title="Grid & List Toggle"></i></a></h5>
+        <nav id="left-sidebar-nav" class="sidebar-nav">
+            <ul class="metismenu">
+                <li class="g_heading">Project</li>
+                <li><a href="/"><svg width="18" height="18" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M384 1152q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm192-448q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm428 481l101-382q6-26-7.5-48.5t-38.5-29.5-48 6.5-30 39.5l-101 382q-60 5-107 43.5t-63 98.5q-20 77 20 146t117 89 146-20 89-117q16-60-6-117t-72-91zm660-33q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm-640-640q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm448 192q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm320 448q0 261-141 483-19 29-54 29h-1402q-35 0-54-29-141-221-141-483 0-182 71-348t191-286 286-191 348-71 348 71 286 191 191 286 71 348z"/></svg><span style="margin-left: 13px;">Dashboard</span></a></li>                        
+                <li class="g_heading">App</li>
+                <li class="active"><a href="/india"><i class="fi-flag" style="font-size: 21px;"></i><span>India</span></a></li>
+                <li><a href="/chart"><svg width="18" height="18" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M2048 1536v128h-2048v-1536h128v1408h1920zm-384-1024l256 896h-1664v-576l448-576 576 576z"/></svg><span style="margin-left: 13px;">Charts</span></a></li>
+                <li><a href="/news"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" id="entypo-globe" width="18" height="18" fill="currentColor"><g><path d="M10 .4C4.705.4.399 4.707.399 10c0 5.293 4.306 9.6 9.601 9.6 5.293 0 9.6-4.307 9.6-9.6 0-5.293-4.307-9.6-9.6-9.6zm8.188 9.6c0 1.873-.636 3.6-1.696 4.98-.3-.234-.619-.867-.319-1.523.303-.66.382-2.188.312-2.783-.066-.594-.375-2.025-1.214-2.039-.838-.012-1.413-.289-1.911-1.283-1.033-2.068 1.939-2.465.906-3.609-.289-.322-1.783 1.322-2.002-.869-.014-.157.135-.392.336-.636 3.244 1.09 5.588 4.157 5.588 7.762zM8.875 1.893c-.196.382-.713.537-1.027.824-.684.619-.978.533-1.346 1.127-.371.594-1.567 1.449-1.567 1.879s.604.936.906.838c.302-.1 1.099-.094 1.567.07.469.166 3.914.332 2.816 3.244-.348.926-1.873.77-2.279 2.303-.061.225-.272 1.186-.285 1.5-.025.486.344 2.318-.125 2.318-.471 0-1.738-1.639-1.738-1.936 0-.297-.328-1.338-.328-2.23 0-.891-1.518-.877-1.518-2.062 0-1.068.823-1.6.638-2.113-.181-.51-1.627-.527-2.23-.59a8.213 8.213 0 0 1 6.516-5.172zM7.424 17.77c.492-.26.542-.596.988-.613.51-.023.925-.199 1.5-.326.51-.111 1.423-.629 2.226-.695.678-.055 2.015.035 2.375.689a8.159 8.159 0 0 1-7.089.945z"/></g></svg><span style="margin-left: 13px;">Civic Freedom Tracker</span></a></li>
+                
+                <li class="g_heading">Support</li>
+                <li><a href="/contactus"><svg width="18" height="18" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1265 1238q0-57-5.5-107t-21-100.5-39.5-86-64-58-91-22.5q-6 4-33.5 20.5t-42.5 24.5-40.5 20-49 17-46.5 5-46.5-5-49-17-40.5-20-42.5-24.5-33.5-20.5q-51 0-91 22.5t-64 58-39.5 86-21 100.5-5.5 107q0 73 42 121.5t103 48.5h576q61 0 103-48.5t42-121.5zm-173-594q0-108-76.5-184t-183.5-76-183.5 76-76.5 184q0 107 76.5 183t183.5 76 183.5-76 76.5-183zm636 540v192q0 14-9 23t-23 9h-96v224q0 66-47 113t-113 47h-1216q-66 0-113-47t-47-113v-1472q0-66 47-113t113-47h1216q66 0 113 47t47 113v224h96q14 0 23 9t9 23v192q0 14-9 23t-23 9h-96v128h96q14 0 23 9t9 23v192q0 14-9 23t-23 9h-96v128h96q14 0 23 9t9 23z"/></svg><span style="margin-left: 13px;">Contact Us</span></a></li>
+                <li><a href="/privacy"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="mdi-book-lock" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18,2H12V9L9.5,7.5L7,9V2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V4A2,2 0 0,0 18,2M18,20H10V16H11V15A3,3 0 0,1 14,12A3,3 0 0,1 17,15V16H18V20M15,15V16H13V15A1,1 0 0,1 14,14A1,1 0 0,1 15,15Z"/></svg><span style="margin-left: 13px;">Privacy Policy</span></a></li>
+            </ul>
+        </nav>        
+    </div>
+
+    <div class="page">
+        <div id="page_top" class="section-body top_dark">
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="left">
+                        <a href="javascript:void(0)" class="icon menu_toggle mr-3"><i class="fi-list" style="color: white; font-size: large"></i></a>
+                        <h1 class="page-title" style="color: rgb(255, 255, 255);">India</h1>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+
+        <center>
+            <div class="row">
+                <div class="col">
+                    <b><span id="date" class="col-lg-6 col-6"></span></b>
+                    <span id="time" class="col-lg-6 col-6"></span>
+                </div>
+            </div>
+        </center>
+
+        <div class="section-body mt-3">
+            <div class="container-fluid">
+                <div class="mb-4">
+                    <div class="row clearfix row-deck">
+                        <div class="col-lg-3 col-6 mb-2">
+                            <div class="card border-danger" style="box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.75);">
+                                <div class="card-header" style="background-color: rgb(255, 110, 142);">
+                                    <h3 class="card-title"><b>Confirmed</b></h3>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="number mb-0 font-28">{{total.confirmed}}  <p style="color: rgb(255, 107, 138); font-size: 20px">+{{total.deltaconfirmed}}</p></h5>
+                                    <div class="table-responsive">
+                                        <canvas id="confirmed" style="height:80px;" class="chartjs-render-monitor"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 mb-2">
+                            <div class="card border-secondary" style="box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.75);">
+                                <div class="card-header" style="background-color: rgb(168, 173, 178);">
+                                    <h3 class="card-title"><b>Deceased</b></h3>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="number mb-0 font-28">{{total.deaths}}  <p style="color: rgb(168, 173, 178); font-size: 20px">+{{total.deltadeaths}}</p></h5>
+                                    <div class="table-responsive">
+                                        <canvas id="deceased" style="height:80px;" class="chartjs-render-monitor"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 mb-2">
+                            <div class="card border-success" style="box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.75);"> 
+                                <div class="card-header" style="background-color: rgb(127, 203, 144);">
+                                    <h3 class="card-title"><b>Recovered</b></h3>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="number mb-0 font-28">{{total.recovered}}  <p style="color: rgb(127, 203, 144); font-size: 20px">+{{total.deltarecovered}}</p></h5>
+                                    <div class="table-responsive">
+                                        {{!-- <canvas id="recovered" style="height:80px;" class="chartjs-render-monitor"></canvas> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 mb-2">
+                            <div class="card border-info" style="box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.75);">
+                                <div class="card-header" style="background-color: rgb(148, 197, 250);">
+                                    <h3 class="card-title"><b>Active</b></h3>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="number mb-0 font-28">{{total.active}} <p style="color: rgb(148, 197, 250);; font-size: 20px;">{{total.deltaactive}}</p></h5>
+                                    <div class="table-responsive">
+                                        {{!-- <canvas id="active" style="height:80px;" class="chartjs-render-monitor"></canvas> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix row-deck">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card" style="box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.75);">
+                            <div class="card-header bline change">
+                                <h3 class="card-title" style="color: white; font-weight: 500;">Corona Virus Cases India</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-sm-flex justify-content-between">
+                                    <div class="table-responsive">
+                                        <table id="example" class="table table-striped table-bordered" style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>State</th>
+                                                    <th>Confirmed Cases</th>
+                                                    <th>Recovered Cases</th>
+                                                    <th>Total Deaths</th>
+                                                    <th>Active Cases</th>
+                                                    <th>Covid Portal</th>
+                                                    <th>Covid Facilities</th>
+                                                    <th>Whatsapp</th>
+                                                    <th>Facebook</th>
+                                                    <th>Last Updated</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each india}}
+                                                    <tr>
+                                                        <th style="font-weight: 1000;">{{this.state}}</th>
+                                                        <td style="color: red; font-weight: 600">{{this.confirmed}} <p></p><span style="color: red; font-weight: 300">{{filterZero this.deltaconfirmed}}</span></td>
+                                                        <td style="color: green; font-weight: 600">{{this.recovered}} <p></p><span style="color: green; font-weight: 300">{{filterZero this.deltarecovered}}</span></td>
+                                                        <td style="color: black; font-weight: 600">{{this.deaths}} <p></p><span style="color: black; font-weight: 300">{{filterZero this.deltadeaths}}</span></td>
+                                                        <td style="color: blue; font-weight: 600">{{this.active}} <p></p><span style="color: blue; font-weight: 300">{{filterZero this.deltaactive}}</span></td>
+                                                        <td><a href="{{this.covid_portal_url}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
+                                                        <td><a href="{{this.covid_facilities}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
+                                                        <td><a href="{{this.whatsapp_chatbot_url}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
+                                                        <td><a href="{{this.fb_chatbot_url}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
+                                                        <td>{{getTime lastupdatedtime}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <center>
+            <h3><span class="badge badge-secondary">Covid19 India Statistics</span></h3><br>
+            <b><label for="type">Select type: </label></b>
+            <select id="type" name="type" onchange="type_select()">
+                <option value="select" disabled>Choose Option</option>
+                <option value="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv">Confirmed Cases</option>
+                {{!-- <option value="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv">Recovered Cases</option> --}}
+                <option value="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv">Death Cases</option>
+            </select>
+
+            <div id="caseType" style="margin: 15px">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Cumulative1" onclick="cumulative1()" id="Cumulative1" value="Cumulative1" checked>
+                    <label class="form-check-label" for="Cumulative1">Cumulative</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Cumulative1" onclick="daily1()" id="Daily1" value="Daily1">
+                    <label class="form-check-label" for="Daily1">Daily</label>
+                </div>
+            </div>
+        </center>
+        <center>
+            <div class="container">
+                <div class="row">
+                    <div class="chart_main co-lg-12 col-xl-12" style="width:100%; height: 50%;">
+                        <div class="chartjs-size-monitor">
+                            <div class="chartjs-size-monitor-expand">
+                                <div class=""></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+                                <div class=""></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <canvas id="canvas1" style="min-height:350px" class="chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+            <div class="btn-group">
+                <a id="download" class="btn btn-outline-danger btn-sm btn-block" download="abhay_covid_19.jpg" href="" onclick="download_img1(this);">Click Here To Download Graph</a>
+            </div>
+        </center>
+
+        <div class="section-body">
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <a href="https://www.instagram.com/_abhay_sardhara_/" target="_blank"><i class="fi-social-instagram" style="font-size: 35px;" title="Instagram"></i></a>&nbsp;&nbsp;
+                            <a href="https://www.facebook.com/abhay.sardhara.52" target="_blank"><i class="fi-social-facebook" style="font-size: 35px;" title="Facebook"></i></a>&nbsp;&nbsp;
+                            <a href="https://github.com/Abhaysardhara" target="_blank"><i class="fi-social-github" style="font-size: 35px;" title="Github"></i></a>&nbsp;&nbsp;
+                            <a href="https://www.linkedin.com/in/abhaysardhara7675/" target="_blank"><i class="fi-social-linkedin" style="font-size: 35px;" title="Linkein"></i></a>&nbsp;&nbsp;
+                            <a href="mailto:abhays7675@gmail.com"><i class="fi-mail" style="font-size: 35px;" title="Email"></i></a>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p style="float: right; font-weight: bolder; font-size: 15px;">MADE BY ABHAY SARDHARA</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<script>
+    function init(){for(var t=document.getElementsByTagName("img"),e=0;e<t.length;e++)t[e].getAttribute("data-src")&&t[e].setAttribute("src",t[e].getAttribute("data-src"))}$(document).ready(function(){$.fn.dataTable.isDataTable("#example")?table=$("#example").DataTable():table=$("#example").DataTable({dom:"Bfrtip",buttons:["pageLength","print"],lengthMenu:[[10,15,25,50,100,-1],['10 rows','15 rows','25 rows','50 rows','100 rows','All']],bSort:!1,paging:!0,info:!0,oLanguage:{sSearch:"State: "}})}),$(function(){setInterval(()=>{var t=moment();$("#date").html(t.format("dddd")+" - "+t.format("DD MMMM, YYYY")),$("#time").html(t.format("hh:mm:ss A"))},100)}),window.onload=init;
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+<script src="assets/bundles/lib.vendor.bundle.js"></script>
+<script defer src="assets/js/core.js"></script>
+<script src="./assets/js/custom_chart_india.js"></script>
+<script>
+    var confirmed = [],
+    deceased = [],
+    xlables1 = [];
+    // recovered = [], active = []
+    async function timeSeries1() {
+        var e = await fetch("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"),
+            a = await fetch("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv");
+            // t = await fetch("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")
+
+        let n = (await e.text()).split("\n"),
+            o = (await a.text()).split("\n");
+            // i = (await t.text()).split("\n"),
+        xlables1 = n[0].split(",").splice(4);
+        let l, s, r, d = 0,
+            c = (n = n.splice(1)).length - 1;
+        for (; d <= c;) {
+            let e = n[l = Math.floor((d + c) / 2)].split(",");
+            if ("India" == e[1]) break;
+            e[1] < "India" ? d = l + 1 : c = l - 1
+        }
+        /* for (d = 0, c = (i = i.splice(1)).length - 1; d <= c;) {
+            let e = i[s = Math.floor((d + c) / 2)].split(",");
+            if ("India" == e[1]) break;
+            e[1] < "India" ? d = s + 1 : c = s - 1
+        } */
+        for (d = 0, c = (o = o.splice(1)).length - 1; d <= c;) {
+            let e = o[r = Math.floor((d + c) / 2)].split(",");
+            if ("India" == e[1]) break;
+            e[1] < "India" ? d = r + 1 : c = r - 1
+        }
+        let p = [],
+            g = [],
+            f = 0;
+            // u = [],
+        p = n[l].split(",").splice(4), g = o[r].split(",").splice(4); // u = i[s].split(",").splice(4),
+        let m = p.length;
+        for (let e = m - 30; e < m; ++e) {
+            confirmed[f] = parseInt(p[e]) - parseInt(p[e - 1])
+            //recovered[f] = parseInt(u[e])==0 ? parseInt(u[e]) : parseInt(u[e]) - parseInt(u[e - 1])
+            deceased[f] = parseInt(g[e]) - parseInt(g[e - 1])
+            //active[f] = confirmed[f] - recovered[f] - deceased[f]
+            f += 1;
+        }
+        xlables1 = xlables1.splice(m - 30), confirmed[29] - confirmed[28] == -1 * confirmed[28] && (confirmed.splice(-1), deceased.splice(-1), xlables1.splice(-1))
+    }
+
+    function getConfirmed1() {
+        let e = {
+            type: "line",
+            data: {
+                labels: xlables1,
+                datasets: [{
+                    backgroundColor: color(window.chartColors.red).alpha(.2).rgbString(),
+                    borderColor: window.chartColors.red,
+                    pointRadius: function(e) {
+                        return 29 == e.dataIndex ? 4 : 1
+                    },
+                    fill: !1,
+                    data: confirmed,
+                    pointBackgroundColor: function(e) {
+                        return 29 == e.dataIndex ? "red" : ""
+                    }
+                }]
+            },
+            options: {
+                legend: {
+                    display: !1
+                },
+                responsive: !0,
+                maintainAspectRatio: !1,
+                title: {
+                    display: !1
+                },
+                scales: {
+                    xAxes: [{
+                        display: !1
+                    }],
+                    yAxes: [{
+                        display: !1
+                    }]
+                },
+                tooltips: {
+                    intersect: !1,
+                    mode: "index",
+                    callbacks: {
+                        label: function(e, t) {
+                            var a = t.datasets[e.datasetIndex].label || "";
+                            return a && (a += ": "), a + e.value
+                        }
+                    }
+                }
+            }
+        };
+        var t = document.getElementById("confirmed").getContext("2d");
+        window.myLine1 = new Chart(t, e)
+    }
+
+    /* function getConfirmed2() {
+        let e = {
+            type: "line",
+            data: {
+                labels: xlables1,
+                datasets: [{
+                    backgroundColor: color(window.chartColors.green).alpha(.2).rgbString(),
+                    borderColor: window.chartColors.green,
+                    pointRadius: function(e) {
+                        return 29 == e.dataIndex ? 4 : 1
+                    },
+                    fill: !1,
+                    data: recovered,
+                    pointBackgroundColor: function(e) {
+                        return 29 == e.dataIndex ? "green" : ""
+                    }
+                }]
+            },
+            options: {
+                legend: {
+                    display: !1
+                },
+                responsive: !0,
+                maintainAspectRatio: !1,
+                title: {
+                    display: !1
+                },
+                scales: {
+                    xAxes: [{
+                        display: !1
+                    }],
+                    yAxes: [{
+                        display: !1
+                    }]
+                },
+                tooltips: {
+                    intersect: !1,
+                    mode: "index",
+                    callbacks: {
+                        label: function(e, t) {
+                            var a = t.datasets[e.datasetIndex].label || "";
+                            return a && (a += ": "), a + e.value
+                        }
+                    }
+                }
+            }
+        };
+        var t = document.getElementById("recovered").getContext("2d");
+        window.myLine2 = new Chart(t, e)
+    } */
+
+    function getConfirmed3() {
+        let e = {
+            type: "line",
+            data: {
+                labels: xlables1,
+                datasets: [{
+                    backgroundColor: color(window.chartColors.grey).alpha(.2).rgbString(),
+                    borderColor: window.chartColors.grey,
+                    pointRadius: function(e) {
+                        return 29 == e.dataIndex ? 4 : 1
+                    },
+                    fill: !1,
+                    data: deceased,
+                    pointBackgroundColor: function(e) {
+                        return 29 == e.dataIndex ? "black" : ""
+                    }
+                }]
+            },
+            options: {
+                legend: {
+                    display: !1
+                },
+                responsive: !0,
+                maintainAspectRatio: !1,
+                title: {
+                    display: !1
+                },
+                scales: {
+                    xAxes: [{
+                        display: !1
+                    }],
+                    yAxes: [{
+                        display: !1
+                    }]
+                },
+                tooltips: {
+                    intersect: !1,
+                    mode: "index",
+                    callbacks: {
+                        label: function(e, t) {
+                            var a = t.datasets[e.datasetIndex].label || "";
+                            return a && (a += ": "), a + e.value
+                        }
+                    }
+                }
+            }
+        };
+        var t = document.getElementById("deceased").getContext("2d");
+        window.myLine3 = new Chart(t, e)
+        console.log('');
+    }
+
+    /* function getConfirmed4() {
+        let e = {
+            type: "line",
+            data: {
+                labels: xlables1,
+                datasets: [{
+                    backgroundColor: color(window.chartColors.blue).alpha(.2).rgbString(),
+                    borderColor: window.chartColors.blue,
+                    pointRadius: function(e) {
+                        return 29 == e.dataIndex ? 4 : 1
+                    },
+                    fill: !1,
+                    data: active,
+                    pointBackgroundColor: function(e) {
+                        return 29 == e.dataIndex ? "blue" : ""
+                    }
+                }]
+            },
+            options: {
+                legend: {
+                    display: !1
+                },
+                responsive: !0,
+                maintainAspectRatio: !1,
+                title: {
+                    display: !1
+                },
+                scales: {
+                    xAxes: [{
+                        display: !1
+                    }],
+                    yAxes: [{
+                        display: !1
+                    }]
+                },
+                tooltips: {
+                    intersect: !1,
+                    mode: "index",
+                    callbacks: {
+                        label: function(e, t) {
+                            var a = t.datasets[e.datasetIndex].label || "";
+                            return a && (a += ": "), a + e.value
+                        }
+                    }
+                }
+            }
+        };
+        var t = document.getElementById("active").getContext("2d");
+        window.myLine4 = new Chart(t, e)
+    } */
+
+    timeSeries1().then(() => {
+        getConfirmed1(), getConfirmed3()
+    }).catch(e => {
+        console.log(e)
+    });
+</script>
+</body>
+</html>
