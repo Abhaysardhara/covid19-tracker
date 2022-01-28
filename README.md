@@ -3,7 +3,9 @@
 [![version](https://img.shields.io/badge/version-1.1-green.svg)](https://github.com/Abhaysardhara/Draw-Anything-Google-Chrome-Extension/releases/tag/v1.0)
 
 ## Live At
-Click here : <https://covid19-tracker-abhay.herokuapp.com/>
+| Status        |  Link to Website                                           | Description            |
+| ------------- | -------------------------------------------------------- | ---------------------- |
+| :green_heart: | <https://covid19-tracker-abhay.herokuapp.com/>  | Covid19 Tracker Dashboard      |
 
 ## API for data
 Latest Top 10 Covid News : <https://covid19-tracker-abhay.herokuapp.com/api/v1/getNews> </br>
