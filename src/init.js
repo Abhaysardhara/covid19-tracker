@@ -40,7 +40,7 @@ module.exports = function(app, express) {
     hbs.registerHelper('checkSign', (value, sign) => {
         if(value>0 && sign=='+') return true
         else if(value<0 && sign=='-') return true
-        return true
+        return false
     })
 
     hbs.registerHelper('filterZero', (value) => {
@@ -51,7 +51,7 @@ module.exports = function(app, express) {
         else if(value > 0) {
             return '↑ ' + value
         }
-        else return '↓ ' + value
+        else return '↓ ' + value*(-1)
     });
 
     hbs.registerHelper('isNew', (index) => {

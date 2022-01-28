@@ -376,10 +376,10 @@
                                                         <td>{{this.deaths}} <p></p><span style="color: black; font-weight: 300">{{filterZero this.deltadeaths}}</span></td>
                                                         {{!-- <td>{{this.active}} <p></p><span style="color: blue; font-weight: 300">{{filterZero this.deltaactive}}</span></td> --}}
                                                         <td>{{this.active}} <p></p>
-                                                            {{#if (checkSign deltaactive '+')}}
+                                                            {{#if (checkSign this.deltaactive '+')}}
                                                                 <span style="color: red; font-weight: 300">{{filterZero this.deltaactive}}</span>
                                                             {{else}}
-                                                                {{#if (checkSign deltaactive '-')}}
+                                                                {{#if (checkSign this.deltaactive '-')}}
                                                                     <span style="color: green; font-weight: 300">{{filterZero this.deltaactive}}</span>
                                                                 {{/if}}
                                                             {{/if}}
