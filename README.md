@@ -6,10 +6,10 @@
 Click here : <https://covid19-tracker-abhay.herokuapp.com/>
 
 ## API for data
-Latest Top 10 Covid News : <https://covid19-tracker-abhay.herokuapp.com/Api/getNews> </br>
-Civic freedom tracker : <https://covid19-tracker-abhay.herokuapp.com/Api/civicFreedomTracker> </br>
-Weekly Siuation Reports by WHO : <https://covid19-tracker-abhay.herokuapp.com/Api/situationReports> </br>
-Indian State wise latest covid data: <https://covid19-tracker-abhay.herokuapp.com/Api/indiaData>
+Latest Top 10 Covid News : <https://covid19-tracker-abhay.herokuapp.com/api/v1/getNews> </br>
+Civic freedom tracker : <https://covid19-tracker-abhay.herokuapp.com/api/v1/civicFreedomTracker> </br>
+Weekly Siuation Reports by WHO : <https://covid19-tracker-abhay.herokuapp.com/api/v1/situationReports> </br>
+Indian State wise latest covid data: <https://covid19-tracker-abhay.herokuapp.com/api/v1/indiaData>
 
 ## About Project
 Covid 19 Tracker is web application to display up to date data of covid cases.
