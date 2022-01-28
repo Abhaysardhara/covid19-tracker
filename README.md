@@ -3,13 +3,18 @@
 [![version](https://img.shields.io/badge/version-1.1-green.svg)](https://github.com/Abhaysardhara/Draw-Anything-Google-Chrome-Extension/releases/tag/v1.0)
 
 ## Live At
-Click here : <https://covid19-tracker-abhay.herokuapp.com/>
+| Status        |  Link to Website                                           | Description            |
+| ------------- | -------------------------------------------------------- | ---------------------- |
+| :green_heart: | <https://covid19-tracker-abhay.herokuapp.com/>  | Covid19 Tracker Dashboard      |
 
 ## API for data
-Latest Top 10 Covid News : <https://covid19-tracker-abhay.herokuapp.com/Api/getNews> </br>
-Civic freedom tracker : <https://covid19-tracker-abhay.herokuapp.com/Api/civicFreedomTracker> </br>
-World latest covid data : <https://covid19-tracker-abhay.herokuapp.com/Api/worldData> </br>
-Indian State wise latest covid data: <https://covid19-tracker-abhay.herokuapp.com/Api/indiaData>
+
+| Status        |  Link to API                                              | Description            |
+| ------------- | -------------------------------------------------------- | ---------------------- |
+| :green_heart: | <https://covid19-tracker-abhay.herokuapp.com/Api/getNews>  | Latest Top 10 Covid News        |
+| :green_heart: | <https://covid19-tracker-abhay.herokuapp.com/Api/civicFreedomTracker>  | Civic freedom tracker   |
+| :green_heart: | <https://covid19-tracker-abhay.herokuapp.com/Api/worldData> | World latest covid data
+| :green_heart: | <https://covid19-tracker-abhay.herokuapp.com/Api/indiaData> | Indian State wise latest covid data
 
 ## About Project
 Covid 19 Tracker is web application to display up to date data of covid cases.
