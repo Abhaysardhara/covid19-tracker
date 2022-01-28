@@ -106,7 +106,7 @@ const get_news = async () => {
 }
 
 const getUpdate = async () => {
-    var response = await fetch('https://api.covid19india.org/updatelog/log.json');
+    var response = await fetch('https://data.covid19bharat.org/updatelog/log.json');
     var data = await response.json();
     return Promise.all(data.reverse());
 }
@@ -132,7 +132,7 @@ const situationReports = async() =>{
 };
 
 const indiaCasesByStates = async () =>{
-    const res = await fetch('https://data.covid19india.org/v4/min/data.min.json');
+    const res = await fetch('https://data.covid19bharat.org/v4/min/data.min.json');
     const data = await res.json();
     const response = new Array();
     Object.keys(data).forEach(key => {
@@ -154,6 +154,7 @@ const indiaCasesByStates = async () =>{
 			"state": state_name[key],
 			"statecode": key
         };
+        temp["deltaactive"] = temp["deltaconfirmed"] - temp["deltadeaths"] - temp["deltarecovered"];
         response.push(temp);
     });
     return Promise.all(response);

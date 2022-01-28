@@ -6,6 +6,10 @@ const path = require('path');
 
 module.exports = function(app, express) {
 
+    hbs.registerHelper('indianCaseTime', function (date) {
+        return moment.unix(parseInt(moment(date, "YYYY-MM-DDTHH:mm:ss+05:30").format("X"))).fromNow();
+    });
+
     hbs.registerHelper('formatTop10NewsTime', function (date, format) {
         return moment.unix(parseInt(moment(date, format).format("X"))).fromNow();
     });
@@ -32,16 +36,22 @@ module.exports = function(app, express) {
         }
         return z;
     });
-    
+
+    hbs.registerHelper('checkSign', (value, sign) => {
+        if(value>0 && sign=='+') return true
+        else if(value<0 && sign=='-') return true
+        return true
+    })
+
     hbs.registerHelper('filterZero', (value) => {
         let str_to_int = parseInt(value)
         if(str_to_int == 0) {
             return ''
         }
         else if(value > 0) {
-            return '+' + value
+            return '↑ ' + value
         }
-        else return value
+        else return '↓ ' + value
     });
 
     hbs.registerHelper('isNew', (index) => {

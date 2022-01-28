@@ -168,16 +168,17 @@ app.get('/india', (req, res) => {
     client.get('india_data', (err, result) => {
         if(result) {
             result = JSON.parse(result);
+            
             res.render('india', {india : result, total : total_data});
         }
         else {
-            myGov().then((result) => {
-                total = result[0];
-                result.shift();
+            indiaCasesByStates().then((result) => {
                 arr2 = result;
                 arr2.sort((a, b) => {
                     return b.confirmed - a.confirmed;
                 });
+                total = arr2[0];
+                arr2.shift();
             }).then(function() {
                 res.render('india', {india : arr2, total : total});
                 client.setex('india_data', 4*60*60, JSON.stringify(arr2));
@@ -296,10 +297,10 @@ app.get('/abhay/data', (req, res) => {
     });
 });
 
-app.get('/Api/getNews', (req, res) => {
+app.get('/api/v1/getNews', (req, res) => {
     client.get('get_news_latest', (err, result) => {
         if(result) {
-            res.json(result);
+            res.json(JSON.parse(result));
         }
         else {
             get_news().then(data => res.json(data))
@@ -307,10 +308,10 @@ app.get('/Api/getNews', (req, res) => {
     });
 })
 
-app.get('/Api/civicFreedomTracker', (req, res) => {
+app.get('/api/v1/civicFreedomTracker', (req, res) => {
     client.get('civic', (err, result) => {
         if(result) {
-            res.json(result);
+            res.json(JSON.parse(result));
         }
         else {
             civicFreedomTracker().then(data => res.json(data))
@@ -318,10 +319,10 @@ app.get('/Api/civicFreedomTracker', (req, res) => {
     });
 })
 
-app.get('/Api/worldData', (req, res) => {
+app.get('/api/v1/worldData', (req, res) => {
     client.get('world_data', (err, result) => {
         if(result) {
-            res.json(result);
+            res.json(JSON.parse(result));
         }
         else {
             reports().then(data => res.json(data))
@@ -329,10 +330,10 @@ app.get('/Api/worldData', (req, res) => {
     });
 })
 
-app.get('/Api/indiaData', (req, res) => {
+app.get('/api/v1/indiaData', (req, res) => {
     client.get('india_data', (err, result) => {
         if(result) {
-            res.json(result);
+            res.json(JSON.parse(result));
         }
         else {
             myGov().then(data => res.json(data))
@@ -379,5 +380,5 @@ app.get('/gov', (req, res) => {
 })
 
 server.listen(process.env.PORT || 3000, () => {
-    console.log('server started at port ' + process.env.PORT || '3000');
+    console.log('server started at port ' + process.env.PORT);
 });

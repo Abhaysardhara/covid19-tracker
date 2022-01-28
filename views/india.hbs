@@ -295,7 +295,7 @@
                                     <h3 class="card-title"><b>Confirmed</b></h3>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="number mb-0 font-28">{{total.confirmed}}  <p style="color: rgb(255, 107, 138); font-size: 20px">+{{total.deltaconfirmed}}</p></h5>
+                                    <h5 class="number mb-0 font-28">{{total.confirmed}}  <p style="color: rgb(255, 107, 138); font-size: 20px">{{filterZero total.deltaconfirmed}}</p></h5>
                                     <div class="table-responsive">
                                         <canvas id="confirmed" style="height:80px;" class="chartjs-render-monitor"></canvas>
                                     </div>
@@ -308,7 +308,7 @@
                                     <h3 class="card-title"><b>Deceased</b></h3>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="number mb-0 font-28">{{total.deaths}}  <p style="color: rgb(168, 173, 178); font-size: 20px">+{{total.deltadeaths}}</p></h5>
+                                    <h5 class="number mb-0 font-28">{{total.deaths}}  <p style="color: rgb(168, 173, 178); font-size: 20px">{{filterZero total.deltadeaths}}</p></h5>
                                     <div class="table-responsive">
                                         <canvas id="deceased" style="height:80px;" class="chartjs-render-monitor"></canvas>
                                     </div>
@@ -321,7 +321,7 @@
                                     <h3 class="card-title"><b>Recovered</b></h3>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="number mb-0 font-28">{{total.recovered}}  <p style="color: rgb(127, 203, 144); font-size: 20px">+{{total.deltarecovered}}</p></h5>
+                                    <h5 class="number mb-0 font-28">{{total.recovered}}  <p style="color: rgb(127, 203, 144); font-size: 20px">{{filterZero total.deltarecovered}}</p></h5>
                                     <div class="table-responsive">
                                         {{!-- <canvas id="recovered" style="height:80px;" class="chartjs-render-monitor"></canvas> --}}
                                     </div>
@@ -334,7 +334,7 @@
                                     <h3 class="card-title"><b>Active</b></h3>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="number mb-0 font-28">{{total.active}} <p style="color: rgb(148, 197, 250);; font-size: 20px;">{{total.deltaactive}}</p></h5>
+                                    <h5 class="number mb-0 font-28">{{total.active}} <p style="color: rgb(148, 197, 250);; font-size: 20px;">{{filterZero total.deltaactive}}</p></h5>
                                     <div class="table-responsive">
                                         {{!-- <canvas id="active" style="height:80px;" class="chartjs-render-monitor"></canvas> --}}
                                     </div>
@@ -361,26 +361,35 @@
                                                     <th>Recovered Cases</th>
                                                     <th>Total Deaths</th>
                                                     <th>Active Cases</th>
-                                                    <th>Covid Portal</th>
-                                                    <th>Covid Facilities</th>
-                                                    <th>Whatsapp</th>
-                                                    <th>Facebook</th>
+                                                    <th>Tested</th>
+                                                    <th>Vaccine 1</th>
+                                                    <th>Vaccine 2</th>
                                                     <th>Last Updated</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {{#each india}}
                                                     <tr>
-                                                        <th style="font-weight: 1000;">{{this.state}}</th>
-                                                        <td style="color: red; font-weight: 600">{{this.confirmed}} <p></p><span style="color: red; font-weight: 300">{{filterZero this.deltaconfirmed}}</span></td>
-                                                        <td style="color: green; font-weight: 600">{{this.recovered}} <p></p><span style="color: green; font-weight: 300">{{filterZero this.deltarecovered}}</span></td>
-                                                        <td style="color: black; font-weight: 600">{{this.deaths}} <p></p><span style="color: black; font-weight: 300">{{filterZero this.deltadeaths}}</span></td>
-                                                        <td style="color: blue; font-weight: 600">{{this.active}} <p></p><span style="color: blue; font-weight: 300">{{filterZero this.deltaactive}}</span></td>
-                                                        <td><a href="{{this.covid_portal_url}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
-                                                        <td><a href="{{this.covid_facilities}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
-                                                        <td><a href="{{this.whatsapp_chatbot_url}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
-                                                        <td><a href="{{this.fb_chatbot_url}}" target="_blank"><i class="fi-link" style="font-size: large;"></i></a></td>
-                                                        <td>{{getTime lastupdatedtime}}</td>
+                                                        <th style="font-weight: 800;">{{this.state}}</th>
+                                                        <td>{{this.confirmed}} <p></p><span style="color: red; font-weight: 300">{{filterZero this.deltaconfirmed}}</span></td>
+                                                        <td>{{this.recovered}} <p></p><span style="color: green; font-weight: 300">{{filterZero this.deltarecovered}}</span></td>
+                                                        <td>{{this.deaths}} <p></p><span style="color: black; font-weight: 300">{{filterZero this.deltadeaths}}</span></td>
+                                                        {{!-- <td>{{this.active}} <p></p><span style="color: blue; font-weight: 300">{{filterZero this.deltaactive}}</span></td> --}}
+                                                        <td>{{this.active}} <p></p>
+                                                            {{#if (checkSign deltaactive '+')}}
+                                                                <span style="color: red; font-weight: 300">{{filterZero this.deltaactive}}</span>
+                                                            {{else}}
+                                                                {{#if (checkSign deltaactive '-')}}
+                                                                    <span style="color: green; font-weight: 300">{{filterZero this.deltaactive}}</span>
+                                                                {{/if}}
+                                                            {{/if}}
+
+
+                                                        </td>
+                                                        <td>{{this.tested}}</td>
+                                                        <td>{{this.vaccinated1}}</td>
+                                                        <td>{{this.vaccinated2}}</td>
+                                                        <td>{{indianCaseTime lastupdatedtime}}</td>
                                                     </tr>
                                                 {{/each}}
                                             </tbody>
